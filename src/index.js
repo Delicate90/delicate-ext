@@ -1,7 +1,1 @@
-import _Component from './component'
-
-export const Component = _Component;
-
-export default {
-    Component: _Component
-}
+export {default as Component} from './component'
