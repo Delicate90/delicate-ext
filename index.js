@@ -37,9 +37,9 @@ class Foo extends React.Component{
         this.setState({loading: false});
     };
 
-    submit = async callback=> {
+    submit = async _=> {
         this.setState({loading: true});
-        await callback
+        await this.submit(this.state.onOk)
     };
 
     render() {
@@ -47,7 +47,6 @@ class Foo extends React.Component{
         this.props.getRef(this);
         return(
             <Modal {...this.state}
-                   onOk={this.submit}
                    onCancel={this.hide}>
                 {children}
             </Modal>
