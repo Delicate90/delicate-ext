@@ -12,6 +12,10 @@ class cert {
     static CryptoAgent = null;
 
     constructor() {
+        cert.init();
+    }
+
+    static init() {
         try {
             const dom = document.createElement('div');
             dom.style.display = "none";
@@ -27,7 +31,7 @@ class cert {
         }catch (e) {
             console.error(e);
         }
-    }
+    };
 
     static selectCert() {
         if(cert.CryptoAgent){

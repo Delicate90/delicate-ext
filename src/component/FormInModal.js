@@ -3,8 +3,9 @@ import {
     Modal
 } from 'antd'
 import PropTypes from 'prop-types'
+import Async from './Async'
 
-export default class FormInModal extends React.Component{
+export default class FormInModal extends Async{
 
     static propTypes = {
         getRef: PropTypes.func
@@ -15,31 +16,41 @@ export default class FormInModal extends React.Component{
         confirmLoading: false,
         title: '',
         width: 700,
-        onOk: _=>{}
+        onOk: _=>{},
+        modalConfig: {}
     };
 
-    show = (title, onOk)=> {
-        this.setState({
+    show = async (title, onOk, modalConfig = {})=> {
+        await this.setStateAsync({
             title, onOk,
-            visible: true
+            visible: true,
+            modalConfig
         })
     };
-    hide = _=> {
-        this.setState({
+    hide = async _=> {
+        await this.setStateAsync({
+            visible: false
+        });
+    };
+
+    handleClose = async _=> {
+        await this.setStateAsync({
             visible: false,
             confirmLoading: false,
             title: '',
             width: 700,
-            onOk: _=>{}
-        })
+            onOk: _=>{},
+            modalConfig: {}
+        });
+        this.props.form.resetFields()
     };
 
-    cancel = _=> {
-        this.setState({loading: false});
+    cancel = async _=> {
+        await this.setStateAsync({loading: false});
     };
 
     submit = async _=> {
-        this.setState({loading: true});
+        this.setStateAsync({loading: true});
         await this.submit(this.state.onOk)
     };
 
@@ -62,9 +73,11 @@ export default class FormInModal extends React.Component{
     render() {
         const children = this.template();
         this.props.getRef(this);
+        const {modalConfig = {}, ...other} = this.state;
         return(
-            <Modal {...this.state}
-                   destroyOnClose
+            <Modal {...other}
+                   {...modalConfig}
+                   afterClose={this.handleClose}
                    onCancel={this.hide}>
                 {children}
             </Modal>
