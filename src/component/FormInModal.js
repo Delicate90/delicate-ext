@@ -64,6 +64,7 @@ export default class FormInModal extends React.Component{
         this.props.getRef(this);
         return(
             <Modal {...this.state}
+                   destroyOnClose
                    onCancel={this.hide}>
                 {children}
             </Modal>
