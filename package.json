@@ -1,6 +1,6 @@
 {
   "name": "delicate-ext",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "some extension of react & antd & etc.",
   "main": "dist/bundle.js",
   "files": ["dist"],
