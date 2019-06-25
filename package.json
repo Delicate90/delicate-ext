@@ -1,8 +1,9 @@
 {
   "name": "delicate-ext",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "some extension of react & antd & etc.",
   "main": "dist/bundle.js",
+  "types": "dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
     "build": "webpack --env.NODE_ENV=production",
