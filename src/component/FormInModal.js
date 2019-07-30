@@ -55,12 +55,12 @@ export default class FormInModal extends Async{
 
     validate = _=> {
         return new Promise((resolve, reject) => {
-            this.props.form.validateFields((err, val)=>{
+            this.props.form.validateFields(async (err, val)=>{
                 if(err) {
                     reject(err)
                 }else {
-                    this.setStateAsync({confirmLoading: true});
-                    resolve(val)
+                    await this.setStateAsync({confirmLoading: true});
+                    await resolve(val)
                 }
             })
         })
