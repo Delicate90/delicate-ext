@@ -46,12 +46,7 @@ export default class FormInModal extends Async{
     };
 
     cancel = async _=> {
-        await this.setStateAsync({loading: false});
-    };
-
-    submit = async _=> {
-        this.setStateAsync({loading: true});
-        await this.submit(this.state.onOk)
+        await this.setStateAsync({confirmLoading: false});
     };
 
     set = this.props.form.setFieldsValue;
@@ -64,6 +59,7 @@ export default class FormInModal extends Async{
                 if(err) {
                     reject(err)
                 }else {
+                    this.setStateAsync({confirmLoading: true});
                     resolve(val)
                 }
             })
